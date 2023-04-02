@@ -1,0 +1,3 @@
+CREATE TABLE dimensions (
+    name TEXT PRIMARY KEY NOT NULL
+);

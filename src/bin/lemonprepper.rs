@@ -1,15 +1,16 @@
 use clap::{Command, Arg};
 use lemonprepper_rs::*;
 
-static EDITABLE_TABLES: [&str; 8] = [
+static EDITABLE_TABLES: [&str; 9] = [
     "units",
     "dimensions",
     "recipes",
     "recipe_ingredients",
     "ingredients",
-    "units_conversions",
+    "unit_conversions",
     "dimension_conversions",
-    "inventory"
+    "inventory_items",
+    "store_items"
 ];
 
 fn main() {

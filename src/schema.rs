@@ -1,12 +1,12 @@
 // @generated automatically by Diesel CLI.
 
 diesel::table! {
-    dimension_conversions (ingredient_name, from_dimension_name, to_dimension_name) {
+    dimension_conversions (ingredient_name, from_unit_name, to_unit_name) {
         ingredient_name -> Text,
-        from_dimension_name -> Text,
-        from_dimension_quantity -> Numeric,
-        to_dimension_name -> Text,
-        to_dimension_quantity -> Numeric,
+        from_unit_name -> Text,
+        from_unit_quantity -> Float8,
+        to_unit_name -> Text,
+        to_unit_quantity -> Float8,
     }
 }
 
@@ -24,10 +24,10 @@ diesel::table! {
 }
 
 diesel::table! {
-    inventory (ingredient_name) {
+    inventory_items (ingredient_name) {
         ingredient_name -> Text,
         ingredient_unit_name -> Text,
-        ingredient_unit_quantity -> Numeric,
+        ingredient_unit_quantity -> Float8,
     }
 }
 
@@ -36,7 +36,7 @@ diesel::table! {
         recipe_name -> Text,
         ingredient_name -> Text,
         ingredient_unit_name -> Text,
-        ingredient_unit_quantity -> Numeric,
+        ingredient_unit_quantity -> Float8,
     }
 }
 
@@ -52,17 +52,17 @@ diesel::table! {
         name -> Text,
         ingredient_name -> Text,
         ingredient_unit_name -> Text,
-        ingredient_unit_quantity -> Numeric,
-        price -> Nullable<Numeric>,
+        ingredient_unit_quantity -> Float8,
+        price -> Nullable<Float8>,
     }
 }
 
 diesel::table! {
     unit_conversions (from_unit_name, to_unit_name) {
         from_unit_name -> Text,
-        from_unit_quantity -> Numeric,
+        from_unit_quantity -> Float8,
         to_unit_name -> Text,
-        to_unit_quantity -> Numeric,
+        to_unit_quantity -> Float8,
     }
 }
 
@@ -73,8 +73,8 @@ diesel::table! {
     }
 }
 
-diesel::joinable!(inventory -> ingredients (ingredient_name));
-diesel::joinable!(inventory -> units (ingredient_unit_name));
+diesel::joinable!(inventory_items -> ingredients (ingredient_name));
+diesel::joinable!(inventory_items -> units (ingredient_unit_name));
 diesel::joinable!(recipe_ingredients -> ingredients (ingredient_name));
 diesel::joinable!(recipe_ingredients -> recipes (recipe_name));
 diesel::joinable!(recipe_ingredients -> units (ingredient_unit_name));
@@ -85,7 +85,7 @@ diesel::allow_tables_to_appear_in_same_query!(
     dimension_conversions,
     dimensions,
     ingredients,
-    inventory,
+    inventory_items,
     recipe_ingredients,
     recipes,
     store_items,
